@@ -1,0 +1,79 @@
+{
+  "_comment": "Shadow AI — OpenClaw Configuration Template. Copy to ~/.openclaw/openclaw.json and fill in your API keys.",
+
+  "agent": {
+    "model": "anthropic/claude-opus-4-6",
+    "_model_alternatives": [
+      "openai/gpt-4o",
+      "anthropic/claude-sonnet-4-5",
+      "openai/gpt-4o-mini"
+    ]
+  },
+
+  "agents": {
+    "defaults": {
+      "workspace": "~/.openclaw/workspace",
+      "maxTokens": 8096
+    }
+  },
+
+  "env": {
+    "_comment": "Replace all REPLACE_WITH_YOUR_* values with real keys",
+
+    "OPENAI_API_KEY": "REPLACE_WITH_YOUR_OPENAI_KEY",
+    "_openai_hint": "Get from https://platform.openai.com/api-keys",
+
+    "RECALL_API_KEY": "REPLACE_WITH_YOUR_RECALL_KEY",
+    "_recall_hint": "Get from https://www.recall.ai — free trial available",
+
+    "ASSEMBLY_AI_API_KEY": "REPLACE_WITH_YOUR_ASSEMBLYAI_KEY",
+    "_assemblyai_hint": "Get from https://www.assemblyai.com — free tier available",
+
+    "GOOGLE_CLIENT_ID": "REPLACE_WITH_YOUR_GOOGLE_CLIENT_ID",
+    "GOOGLE_CLIENT_SECRET": "REPLACE_WITH_YOUR_GOOGLE_CLIENT_SECRET",
+    "_google_hint": "Get from https://console.cloud.google.com — enable Gmail API, create Desktop app OAuth2 credentials",
+
+    "TODOIST_API_TOKEN": "REPLACE_WITH_YOUR_TODOIST_TOKEN_OPTIONAL",
+    "_todoist_hint": "Optional. Get from https://todoist.com/app/settings/integrations/developer"
+  },
+
+  "channels": {
+    "_comment": "Configure at least one channel. Run: openclaw channels login telegram",
+    "telegram": {
+      "botToken": "REPLACE_WITH_TELEGRAM_BOT_TOKEN",
+      "_hint": "Create bot at @BotFather on Telegram"
+    }
+  },
+
+  "cron": {
+    "_comment": "Scheduled tasks. Times are in Asia/Kolkata (IST) timezone.",
+    "jobs": [
+      {
+        "id": "morning-briefing",
+        "schedule": "0 9 * * *",
+        "timezone": "Asia/Kolkata",
+        "message": "Generate and send morning briefing for Magic Bus project",
+        "skill": "task-manager"
+      },
+      {
+        "id": "weekly-summary",
+        "schedule": "0 17 * * 5",
+        "timezone": "Asia/Kolkata",
+        "message": "Generate and send weekly project summary for Magic Bus",
+        "skill": "task-manager"
+      },
+      {
+        "id": "inbox-check",
+        "schedule": "0 10,15 * * 1-5",
+        "timezone": "Asia/Kolkata",
+        "message": "Check inbox for new Magic Bus emails and summarize",
+        "skill": "email-agent"
+      }
+    ]
+  },
+
+  "gateway": {
+    "port": 18789,
+    "bind": "loopback"
+  }
+}
